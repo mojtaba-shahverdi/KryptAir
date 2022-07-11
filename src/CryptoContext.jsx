@@ -11,7 +11,7 @@ const CryptoContext = ({ children }) => {
       if (currency === 'USD') setSymbol('$')
       else if (currency === 'EUR') setSymbol('€')
       else if (currency === 'GBP') setSymbol('£')
-    }, [])
+    }, [currency])
     
     return <Crypto.Provider value={{currency,symbol,setCurrency}}>{children}</Crypto.Provider>
 }
