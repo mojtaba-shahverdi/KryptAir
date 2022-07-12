@@ -10,10 +10,10 @@ import { Typography } from '@mui/material'
 const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
-    // [theme.breakpoints.down('md')]: {
-    //   flexDirection: 'column',
-    //   alignItems: 'center',
-    // },
+    [theme.breakpoints.down('md')]: {
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
   },
   sidebar: {
     width: '30%',
