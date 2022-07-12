@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme) => ({
   sidebar: {
     width: '30%',
     // [theme.breakpoints('md')]: {
-      //   width: '100%',
-      // },
+    //     width: '100%',
+    //   },
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
