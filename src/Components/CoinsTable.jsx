@@ -1,4 +1,4 @@
-import { teal } from '@mui/material/colors'
+import { teal, grey } from '@mui/material/colors'
 import { Container, LinearProgress, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { createTheme } from '@mui/material/styles';
@@ -16,14 +16,16 @@ const useStyles = makeStyles({
     row: {
         backgroundColor: "#16171a",
         cursor: "pointer",
+        borderBottom: '1px solid rgba(81, 81, 81, 1)',
         "&:hover": {
-            backgroundColor: "#131111",
+            transition: '1s',
+            backgroundColor: grey.A700,
         },
         fontFamily: "Montserrat",
     },
     pagination: {
         "& .MuiPaginationItem-root": {
-            color: "gold",
+            color: teal[300],
         },
     },
 });
@@ -96,6 +98,7 @@ const CoinsTable = () => {
                                                 color: 'black',
                                                 fontWeight: '700',
                                                 fontFamily: 'Montserrat',
+                                                border: 'none',
                                             }}
                                             key={head}
                                         align={'right'}
@@ -122,6 +125,7 @@ const CoinsTable = () => {
                                                     style={{
                                                         display: "flex",
                                                         gap: 15,
+                                                        borderBottom: 'none',
                                                     }}
                                                 >
                                                     <img
