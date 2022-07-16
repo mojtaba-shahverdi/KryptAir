@@ -4,9 +4,22 @@ import { createTheme, ThemeProvider } from '@mui/system'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { HistoricalChart } from '../config/api'
+import { chartDays } from '../config/data'
 import { CryptoState } from '../CryptoContext'
 import { CircularProgress } from '@mui/material'
-import { Line } from 'react-chartjs-2'
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+import { Line } from 'react-chartjs-2';
+import SelectButton from './SelectButton'
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -76,9 +89,40 @@ const CoinInfo = ({ coin }) => {
                         : `${date.getHours()}:${date.getMinutes()} AM`
                     return days === 1 ? time : date.toLocaleDateString()
                   }),
-                  datasets: [{ data: historicData.map((coin => coin[1])) }]
+                  datasets: [
+                    {
+                      data: historicData.map((coin => coin[1])),
+                      label: `Price ( Past ${days} Days ) in ${currency}`,
+                      borderColor: teal[600]
+                    },
+                  ],
+                }}
+                options={{
+                  elements: {
+                    point: {
+                      radius: 1,
+                    },
+                  },
                 }}
               />
+              <div
+                style={{
+                  display: 'flex',
+                  marginTop: 20,
+                  justifyContent: 'space-around',
+                  width: '100%',
+                }}
+              >
+                {chartDays.map(day => (
+                  <SelectButton
+                    key={day.value}
+                    onClick={() => setDays(day.value)}
+                    selected={day.value === days}
+                  >
+                    {day.label}
+                  </SelectButton>
+                ))}
+              </div>
             </>
           )
         }
