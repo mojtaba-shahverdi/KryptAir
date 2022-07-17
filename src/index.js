@@ -7,9 +7,9 @@ import 'react-alice-carousel/lib/alice-carousel.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <React.Fragment>
     <CryptoContext>
       <App />
     </CryptoContext>
-  </React.StrictMode>
+  </React.Fragment>
 );
