@@ -1,12 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300&family=Montserrat:wght@300;400;800&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
-a{
+
+a {
     text-decoration: none;
     color: #80cbc4;
+}
+
+thead>tr>th:nth-child(1) {
+    text-align: left;
 }

@@ -54,7 +54,7 @@ const CoinInfo = ({ coin }) => {
   useEffect(() => {
     fetchHistoricalData()
   }, [currency, days])
-  console.log('data', historicData)
+
   const darkTheme = createTheme({
     palette: {
       primary: {
@@ -66,7 +66,7 @@ const CoinInfo = ({ coin }) => {
 
 
   const classes = useStyles()
-
+const theme = createTheme()
   return (
     <ThemeProvider theme={darkTheme}>
       <div className={classes.container}>
