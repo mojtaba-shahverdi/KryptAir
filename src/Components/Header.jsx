@@ -4,6 +4,8 @@ import { makeStyles } from '@mui/styles'
 import { useNavigate } from 'react-router-dom'
 import { teal } from '@mui/material/colors'
 import { CryptoState } from '../CryptoContext'
+import AuthModal from './Authentication/AuthModal'
+import UserSidebar from './Authentication/UserSidebar'
 
 const useStyles = makeStyles({
     title: {
@@ -20,7 +22,7 @@ const Header = () => {
     const classes = useStyles()
     const navigate = useNavigate()
     
-    const { currency, setCurrency } = CryptoState()
+    const { currency, setCurrency, user } = CryptoState()
 
     const darkTheme = createTheme({
         palette: {
@@ -49,6 +51,7 @@ const Header = () => {
                             <MenuItem value={'EUR'}>€ EUR</MenuItem>
                             <MenuItem value={'GBP'}>£ GBP</MenuItem>
                         </Select>
+                        {user ? <UserSidebar /> : <AuthModal />}
                     </Toolbar>
                 </Container>
             </AppBar>
