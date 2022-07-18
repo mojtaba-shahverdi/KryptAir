@@ -5,9 +5,11 @@ import { CryptoState } from '../CryptoContext'
 import { SingleCoin } from '../config/api'
 import { makeStyles } from '@mui/styles'
 import CoinInfo from '../Components/CoinInfo'
-import { LinearProgress, Typography } from '@mui/material'
+import { Button, LinearProgress, Typography } from '@mui/material'
 import ReactHtmlParser from 'react-html-parser';
-import { teal } from '@mui/material/colors'
+import { red, teal } from '@mui/material/colors'
+import { doc, setDoc } from '@firebase/firestore'
+import { db } from '../firebase'
 
 export function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -25,83 +27,137 @@ const useStyles = makeStyles((theme) => ({
     // [theme.breakpoints('md')]: {
     //     width: '100%',
     //   },
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      marginTop: 25,
-      borderRight: '2px solid grey',
-    },
-    heading: {
-      fontWeight: 'bold',
-      marginBottom: 20,
-      fontFamily: 'Montserrat',
-    },
-    description: {
-      width: '100%',
-      fontFamily: 'Montserrat',
-      padding: 25,
-      paddingBottom: 15,
-      paddingTop: 0,
-      textAlign: 'justify',
-    },
-    marketData: {
-      alignSelf: 'start',
-      padding: 25,
-      paddingTop: 10,
-      width: '100%',
-      // [theme.breakpoints.down('md')]: {
-      //   display: 'flex',
-      //   justifyContent: 'space-around',
-      // },
-      // [theme.breakpoints.down('sm')]: {
-      //   flexDirection: 'column',
-      //   alignItems: 'center',
-      // },
-      // [theme.breakpoints.down('xs')]: {
-      //   alignItems: 'start',
-      // },
-    },
-  })) 
-  
-  const CoinPage = () => {
-    
-    const { id } = useParams()
-    const [coin, setCoin] = useState()
-    
-    const { currency, symbol } = CryptoState()
-    
-    
-    const fetchCoin = async () => {
-      const { data } = await axios.get(SingleCoin(id))
-      
-      setCoin(data)
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: 25,
+    borderRight: '2px solid grey',
+  },
+  heading: {
+    fontWeight: 'bold',
+    marginBottom: 20,
+    fontFamily: 'Montserrat',
+  },
+  description: {
+    width: '100%',
+    fontFamily: 'Montserrat',
+    padding: 25,
+    paddingBottom: 15,
+    paddingTop: 0,
+    textAlign: 'justify',
+  },
+  marketData: {
+    alignSelf: 'start',
+    padding: 25,
+    paddingTop: 10,
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    // [theme.breakpoints.down('md')]: {
+    //   display: 'flex',
+    //   justifyContent: 'space-around',
+    //   alignItems: 'center',
+    // },
+    // [theme.breakpoints.down('sm')]: {
+    //   flexDirection: 'column',
+    //   alignItems: 'center',
+    // },
+    // [theme.breakpoints.down('xs')]: {
+    //   alignItems: 'start',
+    // },
+  },
+}))
+
+const CoinPage = () => {
+
+  const { id } = useParams()
+  const [coin, setCoin] = useState()
+
+  const { currency, symbol, user, watchlist, setAlert } = CryptoState()
+
+
+  const fetchCoin = async () => {
+    const { data } = await axios.get(SingleCoin(id))
+
+    setCoin(data)
+  }
+
+  useEffect(() => {
+    fetchCoin()
+    console.log(coin)
+  }, [])
+
+  const inWatchlist = watchlist.includes(coin?.id)
+
+  const addToWatchlist = async () => {
+    const coinRef = doc(db, 'watchlist', user.uid)
+
+    try {
+      await setDoc(coinRef, {
+        coins: watchlist ? [...watchlist, coin.id] : [coin?.id],
+      })
+
+      setAlert({
+        open: true,
+        message: `${coin.name} Added to WatchList !`,
+        type: 'success',
+      })
+    } catch (error) {
+      setAlert({
+        open: true,
+        message: error.message,
+        type: 'error',
+      })
     }
-    
-    useEffect(() => {
-      fetchCoin()
-      console.log(coin)
-    }, [])
-  
+  }
+
+  const removeFromWatchlist = async () => {
+    const coinRef = doc(db, 'watchlist', user.uid)
+
+    try {
+      await setDoc(coinRef, {
+        coins: watchlist.filter((watch) => watch !== coin?.id)
+      },
+        { merge: 'true' }
+      )
+
+      setAlert({
+        open: true,
+        message: `${coin.name} Removed from WatchList !`,
+        type: 'success',
+      })
+    } catch (error) {
+      setAlert({
+        open: true,
+        message: error.message,
+        type: 'error',
+      })
+    }
+  }
+
   const classes = useStyles()
 
   if (!coin) return <LinearProgress style={{ background: teal.A700 }} />
-  
+
   return (
     <div className={classes.container}>
-        <div className={classes.sidebar}>
-          <img
-            src={coin?.image.large}
-            alt={coin?.name}
-            height='200'
-            style={{ marginBottom: 20 }}
-            />
-          <Typography variant='h3' className={classes.heading}>
-            {coin?.name}
-          </Typography>
-          <Typography variant='subtitle1' className={classes.description}>
-            {ReactHtmlParser(coin?.description.en.split('. ')[0])}.
-          </Typography>
-          <div className={classes.marketData}>
+      <div className={classes.sidebar}>
+        <img
+          src={coin?.image.large}
+          alt={coin?.name}
+          height='200'
+          style={{ marginBottom: 20 }}
+        />
+        <Typography variant='h3' className={classes.heading}>
+          {coin?.name}
+        </Typography>
+        <Typography variant='subtitle1' className={classes.description}>
+          {ReactHtmlParser(coin?.description.en.split('. ')[0])}.
+        </Typography>
+        <div className={classes.marketData}>
+          <div>
             <span style={{ display: 'flex' }}>
               <Typography variant='h5' className={classes.heading}>
                 Rank:
@@ -139,8 +195,23 @@ const useStyles = makeStyles((theme) => ({
               </Typography>
             </span>
           </div>
+          <div>
+            {user && (
+              <Button
+                variant='contained'
+                style={{
+                  width: '100%',
+                  background: inWatchlist ? red.A700 : teal.A700
+                }}
+                onClick={inWatchlist ? removeFromWatchlist : addToWatchlist}
+              >
+                {inWatchlist ? 'Remove from WatchList' : 'Add to WatchList'}
+              </Button>
+            )}
+          </div>
         </div>
-        <CoinInfo coin={coin} />
+      </div>
+      <CoinInfo coin={coin} />
     </div>
   )
 }
