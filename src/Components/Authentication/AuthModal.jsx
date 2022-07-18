@@ -14,6 +14,9 @@ import Login from './Login';
 import Signup from './Signup';
 import { makeStyles } from '@mui/styles';
 import GoogleButton from 'react-google-button'
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { CryptoState } from '../../CryptoContext';
+import { auth } from '../../firebase';
 
 const style = {
     position: 'absolute',
@@ -82,8 +85,27 @@ const AuthModal = () => {
         setValue(newValue);
     };
 
-    const signInWithGoogle = () => {
+    const { setAlert } = CryptoState() 
 
+    const googleProvider = new GoogleAuthProvider()
+
+    const signInWithGoogle = () => {
+        signInWithPopup(auth, googleProvider).then(res => {
+            setAlert({
+                open: true,
+                message: `Sign Up Successful. Welcome ${res.user.email}`,
+                type: 'success',
+            })
+
+            handleClose()
+        }).catch(error => {
+            setAlert({
+                open: true,
+                message: error.message,
+                type: 'error',
+            })
+            return
+        })
     }
 
     const classes = useStyles()
