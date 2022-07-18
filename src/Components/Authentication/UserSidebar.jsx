@@ -44,7 +44,7 @@ const useStyles = makeStyles({
         overflowX: 'hidden',
     },
     coin: {
-        padding: 10,
+        padding: '0 5px',
         borderRadius: 5,
         color: 'black',
         width: '100%',
@@ -113,7 +113,7 @@ const UserSidebar = () => {
     }
 
     const classes = useStyles()
-
+console.log(coins)
     return (
         <div>
             {['right'].map((anchor) => (
@@ -182,7 +182,10 @@ const UserSidebar = () => {
                                                     onClick={() => navigate(`../coins/${coin.id}`)}
                                                     onMouseUpCapture={toggleDrawer(anchor, false)}
                                                 >
+                                                    <div style={{display: 'flex', alignItems: 'center'}}>
+                                                    <img style={{width: 35, marginRight: 5, padding: 5}} src={coin.image}/>
                                                     <span>{coin.name}</span>
+                                                    </div>
                                                     <span style={{ display: 'flex', gap: 8 }}>
                                                         {symbol}
                                                         {numberWithCommas(coin.current_price.toFixed(2))}
