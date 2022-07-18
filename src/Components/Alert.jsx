@@ -13,11 +13,16 @@ const Alert = () => {
 
         setAlert({ open: false })
     };
-
+    const [position] = React.useState({
+        vertical: 'top',
+        horizontal: 'left',
+    });
+    const { vertical, horizontal } = position;
     return (
-        <Snackbar 
-            open={alert.open} 
-            autoHideDuration={3000} 
+        <Snackbar
+            anchorOrigin={{ vertical, horizontal }}
+            open={alert.open}
+            autoHideDuration={3000}
             onClose={handleClose}
         >
             <MuiAlert
@@ -26,7 +31,7 @@ const Alert = () => {
                 variant='filled'
                 severity={alert.type}
             >
-                { alert.message }
+                {alert.message}
             </MuiAlert>
         </Snackbar>
     )
