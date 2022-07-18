@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import { CryptoState } from '../../CryptoContext';
 import Avatar from '@mui/material/Avatar';
 import { makeStyles } from '@mui/styles'
-import { grey, teal } from '@mui/material/colors';
+import { grey, red, teal } from '@mui/material/colors';
 import { signOut } from 'firebase/auth';
 import { auth, db } from '../../firebase';
 import { numberWithCommas } from '../../Pages/CoinPage';
@@ -58,6 +58,12 @@ const useStyles = makeStyles({
         "&:hover": {
             transition: '0.7s',
             backgroundColor: teal.A700,
+        },
+    },
+    delete:{
+        "&:hover": {
+            transition: '0.3s',
+            fill: red.A700,
         },
     }
 })
@@ -190,7 +196,7 @@ console.log(coins)
                                                         {symbol}
                                                         {numberWithCommas(coin.current_price.toFixed(2))}
                                                         <AiFillDelete
-                                                            style={{ cursor: 'pointer' }}
+                                                            className={classes.delete}
                                                             fontSize='16'
                                                             onClick={() => removeFromWatchlist(coin)}
                                                             onMouseUpCapture={toggleDrawer(anchor, true)}
