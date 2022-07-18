@@ -2,11 +2,15 @@ import * as React from 'react';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import { CryptoState } from '../../CryptoContext';
-import { Avatar } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
 import { makeStyles } from '@mui/styles'
 import { grey, teal } from '@mui/material/colors';
 import { signOut } from 'firebase/auth';
-import { auth } from '../../firebase';
+import { auth, db } from '../../firebase';
+import { numberWithCommas } from '../../Pages/CoinPage';
+import { AiFillDelete } from 'react-icons/ai'
+import { doc, setDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom'
 
 const useStyles = makeStyles({
     container: {
@@ -29,21 +33,39 @@ const useStyles = makeStyles({
         flex: .94,
         width: '100%',
         background: grey[500],
-        borderRadius: 10,
+        borderRadius: '10px 3px 3px 10px ',
         padding: 15,
-        paddingTop: 10,
+        paddingTop: 0,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         gap: 12,
-        overFlowY: 'scroll',
+        overflowY: 'scroll',
+        overflowX: 'hidden',
     },
+    coin: {
+        padding: 10,
+        borderRadius: 5,
+        color: 'black',
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        background: teal[200],
+        boxShadow: '0 0 3px #80cbc4',
+        cursor: "pointer",
+        borderBottom: '1px solid rgba(81, 81, 81, 1)',
+        "&:hover": {
+            transition: '0.7s',
+            backgroundColor: teal.A700,
+        },
+    }
 })
 
 const UserSidebar = () => {
     const [state, setState] = React.useState({ right: false });
 
-    const { user, setAlert } = CryptoState()
+    const { user, setAlert, watchlist, coins, symbol } = CryptoState()
 
     const toggleDrawer = (anchor, open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -51,6 +73,32 @@ const UserSidebar = () => {
         }
 
         setState({ ...state, [anchor]: open });
+    }
+
+    const navigate = useNavigate()
+
+    const removeFromWatchlist = async (coin) => {
+        const coinRef = doc(db, 'watchlist', user.uid)
+
+        try {
+            await setDoc(coinRef, {
+                coins: watchlist.filter((watch) => watch !== coin?.id)
+            },
+                { merge: 'true' }
+            )
+
+            setAlert({
+                open: true,
+                message: `${coin.name} Removed from WatchList !`,
+                type: 'success',
+            })
+        } catch (error) {
+            setAlert({
+                open: true,
+                message: error.message,
+                type: 'error',
+            })
+        }
     }
 
     const logOut = () => {
@@ -79,7 +127,7 @@ const UserSidebar = () => {
                             background: teal[500]
                         }}
                         src={user.photoURL}
-                        alt={user.displayName || user.email}
+                        alt={user.displayName.toUpperCase() || user.email}
                     />
                     <Drawer
                         anchor={anchor}
@@ -90,7 +138,7 @@ const UserSidebar = () => {
                             <div className={classes.profile}>
                                 <Avatar
                                     src={user.photoURL}
-                                    alt={user.displayName || user.email}
+                                    alt={user.displayName.toUpperCase() || user.email}
                                     style={{
                                         width: 200,
                                         height: 200,
@@ -111,7 +159,43 @@ const UserSidebar = () => {
                                     {user.displayName || user.email}
                                 </span>
                                 <div className={classes.watchlist}>
-                                    WatchList
+                                    <span
+                                        style={{
+                                            fontSize: 15,
+                                            textShadow: '0 0 5px black',
+                                            position: 'sticky',
+                                            top: 0,
+                                            width: '100vw',
+                                            textAlign: 'center',
+                                            background: grey[500],
+                                            padding: 10,
+                                        }}
+                                    >
+                                        WatchList
+                                    </span>
+                                    {coins.map((coin) => {
+                                        if (watchlist.includes(coin.id))
+                                            return (
+                                                <div
+                                                    key={coin.id} 
+                                                    className={classes.coin}
+                                                    onClick={() => navigate(`../coins/${coin.id}`)}
+                                                    onMouseUpCapture={toggleDrawer(anchor, false)}
+                                                >
+                                                    <span>{coin.name}</span>
+                                                    <span style={{ display: 'flex', gap: 8 }}>
+                                                        {symbol}
+                                                        {numberWithCommas(coin.current_price.toFixed(2))}
+                                                        <AiFillDelete
+                                                            style={{ cursor: 'pointer' }}
+                                                            fontSize='16'
+                                                            onClick={() => removeFromWatchlist(coin)}
+                                                            onMouseUpCapture={toggleDrawer(anchor, true)}
+                                                        />
+                                                    </span>
+                                                </div>
+                                            )
+                                    })}
                                 </div>
                             </div>
                             <Button
