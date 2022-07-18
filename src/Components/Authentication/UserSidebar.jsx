@@ -119,7 +119,7 @@ const UserSidebar = () => {
     }
 
     const classes = useStyles()
-console.log(coins)
+
     return (
         <div>
             {['right'].map((anchor) => (
