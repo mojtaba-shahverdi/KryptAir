@@ -6,7 +6,9 @@
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
-
+body{
+    background: #14161a;
+}
 a {
     text-decoration: none;
     color: #80cbc4;
@@ -15,3 +17,17 @@ a {
 thead>tr>th:nth-child(1) {
     text-align: left;
 }
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+    ::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+    ::-webkit-scrollbar-thumb {
+    background: #009688; 
+      border-radius:10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #0096877d; 
+  } 
