@@ -86,7 +86,6 @@ const CoinPage = () => {
 
   useEffect(() => {
     fetchCoin()
-    console.log(coin)
   }, [])
 
   const inWatchlist = watchlist.includes(coin?.id)
