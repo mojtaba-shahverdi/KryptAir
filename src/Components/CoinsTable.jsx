@@ -30,11 +30,11 @@ const useStyles = makeStyles({
     },
 });
 const CoinsTable = () => {
-    
-    
+
+
     const [search, setSearch] = useState()
     const [page, setPage] = useState(1);
-    
+
     const { currency, symbol, coins, loading, fetchCoins } = CryptoState()
 
     const navigate = useNavigate()
@@ -69,8 +69,8 @@ const CoinsTable = () => {
                 >
                     Cryptocurrency prices by Market Cap
                 </Typography>
-                <TextField 
-                    label="Search Any Crypto..." 
+                <TextField
+                    label="Search Any Crypto..."
                     variant='outlined'
                     style={{ marginBottom: 20, width: '100%' }}
                     onChange={(e) => setSearch(e.target.value)}
@@ -91,7 +91,7 @@ const CoinsTable = () => {
                                                 border: 'none',
                                             }}
                                             key={head}
-                                        align={'right'}
+                                            align={'right'}
                                         >
                                             {head}
                                         </TableCell>
