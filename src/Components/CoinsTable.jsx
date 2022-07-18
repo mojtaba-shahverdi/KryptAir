@@ -60,6 +60,7 @@ const CoinsTable = () => {
                 coin.symbol.toLowerCase().includes(search)
         );
     };
+
     return (
         <ThemeProvider theme={darkTheme}>
             <Container style={{ textAlign: 'center' }}>
