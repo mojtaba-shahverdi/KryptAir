@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
     "@mui/lab": "^5.0.0-alpha.89",
     "@mui/material": "^5.8.7",
     "@mui/styles": "^5.8.7",
