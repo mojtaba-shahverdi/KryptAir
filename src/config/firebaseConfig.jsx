@@ -1,6 +1,6 @@
 const firebaseConfig = {
     apiKey: "AIzaSyBl3IiOrlQVd6nsciWKwUCSagaiabqsD8w",
-    authDomain: "cryptoscan.vercel.app",
+    authDomain: "crypto-scan-93917.firebaseapp.com",
     projectId: "crypto-scan-93917",
     storageBucket: "crypto-scan-93917.appspot.com",
     messagingSenderId: "101872535504",
