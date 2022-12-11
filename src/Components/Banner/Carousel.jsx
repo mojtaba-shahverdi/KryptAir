@@ -2,7 +2,7 @@ import { makeStyles } from '@mui/styles'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { CryptoState } from '../../CryptoContext'
-import { TrendingCoins, CoinList } from '../../config/api'
+import { TrendingCoins } from '../../config/api'
 import AliceCarousel from 'react-alice-carousel'
 import { Link } from 'react-router-dom'
 import Logo from '../../assets/logo.png'
@@ -91,6 +91,7 @@ const Carousel = () => {
 
     useEffect(() => {
         fetchTrendingCoins()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currency])
     
     const items = trending.map((coin) => {
@@ -151,7 +152,7 @@ const Carousel = () => {
                 />
         </div>
         <div className={classes.header}>
-            <img src={Logo} width={80} />
+            <img src={Logo} width={80} alt='Crypto Currency Prices' />
            <h4>Crypto Price Tracker</h4>
         </div>
     </div>

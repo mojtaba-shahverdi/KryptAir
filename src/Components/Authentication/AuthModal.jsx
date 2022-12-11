@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import SwipeableViews from 'react-swipeable-views';
-import { useTheme } from '@mui/material/styles';
+// import SwipeableViews from 'react-swipeable-views';
+// import { useTheme } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -9,7 +9,6 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { grey, teal } from '@mui/material/colors';
 import Login from './Login';
 import Signup from './Signup';
 import { makeStyles } from '@mui/styles';
@@ -24,9 +23,12 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: grey[700],
-    boxShadow: 24,
-    borderRadius: 2,
+    // bgcolor: grey[700],
+    background: 'rgba(255, 255, 255, 0.8)',
+    borderRadius: '16px',
+    boxShadow: '0 4px 30px rgb(0 0 0 / 10%)',
+    backdropFilter: 'blur(5px)',
+    border: '1px solid rgba(255, 255, 255, 0.3)',
 };
 const useStyles = makeStyles({
     google: {
@@ -78,7 +80,7 @@ const AuthModal = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const theme = useTheme();
+    // const theme = useTheme();
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {

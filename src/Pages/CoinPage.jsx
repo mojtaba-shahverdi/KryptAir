@@ -82,16 +82,16 @@ const CoinPage = () => {
   const { currency, symbol, user, watchlist, setAlert } = CryptoState()
 
 
-  const fetchCoin = async () => {
-    const { data } = await axios.get(SingleCoin(id))
-
-    setCoin(data)
-  }
-
+  
   useEffect(() => {
+    const fetchCoin = async () => {
+      const { data } = await axios.get(SingleCoin(id))
+  
+      setCoin(data)
+    }
     fetchCoin()
     // console.log(coin)
-  }, [])
+  }, [id])
 
   const inWatchlist = watchlist.includes(coin?.id)
 

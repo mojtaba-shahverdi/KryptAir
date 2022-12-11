@@ -1,10 +1,10 @@
-import { teal, grey } from '@mui/material/colors'
+import { teal } from '@mui/material/colors'
 import { Container, LinearProgress, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { createTheme } from '@mui/material/styles';
-import axios from 'axios'
+// import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { CoinList } from '../config/api'
+// import { CoinList } from '../config/api'
 import { CryptoState } from '../CryptoContext'
 import { useNavigate } from 'react-router-dom'
 import Pagination from '@mui/material/Pagination';
@@ -62,6 +62,7 @@ const CoinsTable = () => {
 
     useEffect(() => {
         fetchCoins()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currency])
 
     const darkTheme = createTheme({

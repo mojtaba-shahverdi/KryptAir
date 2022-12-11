@@ -66,6 +66,7 @@ const CoinInfo = ({ coin }) => {
 
   useEffect(() => {
     fetchHistoricalData()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currency, days])
 
   const darkTheme = createTheme({
@@ -79,7 +80,7 @@ const CoinInfo = ({ coin }) => {
 
 
   const classes = useStyles()
-const theme = createTheme()
+// const theme = createTheme()
   return (
     <ThemeProvider theme={darkTheme}>
       <div className={classes.container}>

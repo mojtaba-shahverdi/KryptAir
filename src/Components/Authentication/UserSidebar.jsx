@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import * as React from 'react';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
@@ -198,7 +199,7 @@ const UserSidebar = () => {
                                                     onMouseUpCapture={toggleDrawer(anchor, false)}
                                                 >
                                                     <div style={{display: 'flex', alignItems: 'center'}}>
-                                                    <img style={{width: 35, marginRight: 5, padding: 5}} src={coin.image}/>
+                                                    <img style={{width: 35, marginRight: 5, padding: 5}} src={coin.image} alt={coin.name} />
                                                     <span>{coin.name}</span>
                                                     </div>
                                                     <span style={{ display: 'flex', gap: 8 }}>
