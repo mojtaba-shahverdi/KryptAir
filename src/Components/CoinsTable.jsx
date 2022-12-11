@@ -14,12 +14,18 @@ export function numberWithCommas(x) {
 }
 const useStyles = makeStyles({
     row: {
-        backgroundColor: "#16171a",
         cursor: "pointer",
-        borderBottom: '1px solid rgba(81, 81, 81, 1)',
+        borderBottom: '2px solid #85cdca',
+        '& .MuiTableCell-root':{
+            borderBottom: '2px solid #85cdca',
+        },
         "&:hover": {
             transition: '1s',
-            backgroundColor: grey.A700,
+            background: 'rgba(255, 255, 255, 0.6)',
+            // borderRadius: '16px',
+            boxShadow: '0 4px 30px rgb(0 0 0 / 10%)',
+            backdropFilter: 'blur(5px)',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
         },
         fontFamily: "Montserrat",
     },
@@ -28,11 +34,25 @@ const useStyles = makeStyles({
             color: teal[300],
         },
     },
+    container:{
+        background: 'rgba(255, 255, 255, 0.2)',
+        borderRadius: '16px',
+        boxShadow: '0 4px 30px rgb(0 0 0 / 10%)',
+        backdropFilter: 'blur(5px)',
+        border: '1px solid rgba(255, 255, 255, 0.3)',
+        margin: 30,
+        width: '95% !important',
+        '& h4':{
+        '@media (max-width:500px)':{
+            fontSize: 20,
+        }
+        }
+    },  
 });
 const CoinsTable = () => {
 
 
-    const [search, setSearch] = useState()
+    const [search, setSearch] = useState("")
     const [page, setPage] = useState(1);
 
     const { currency, symbol, coins, loading, fetchCoins } = CryptoState()
@@ -55,33 +75,38 @@ const CoinsTable = () => {
 
     const handleSearch = () => {
         return coins.filter(
-            (coin) =>
-                coin.name.toLowerCase().includes(search) ||
-                coin.symbol.toLowerCase().includes(search)
-        );
-    };
+          (coin) =>
+            coin.name.toLowerCase().includes(search) ||
+            coin.symbol.toLowerCase().includes(search)
+        )
+    }
 
     return (
         <ThemeProvider theme={darkTheme}>
-            <Container style={{ textAlign: 'center' }}>
+            <Container style={{ textAlign: 'center' }} className={classes.container}>
                 <Typography
                     variant='h4'
-                    style={{ margin: 18, fontFamily: 'Montserrat' }}
+                    style={{ margin: 18, fontFamily: 'Montserrat', color: '#41b3a3' }}
                 >
                     Cryptocurrency prices by Market Cap
                 </Typography>
                 <TextField
                     label="Search Any Crypto..."
                     variant='outlined'
+                    className={classes.input}
                     style={{ marginBottom: 20, width: '100%' }}
                     onChange={(e) => setSearch(e.target.value)}
+                    InputLabelProps={{
+                    style: {
+                        color: '#41b3a3'
+                    } }}
                 />
                 <TableContainer>
                     {loading ? (
                         <LinearProgress style={{ background: teal.A700 }} />
                     ) : (
                         <Table aria-label='simple table'>
-                            <TableHead style={{ background: teal[500] }}>
+                            <TableHead style={{ background: 'transparent', borderBottom: '5px solid #41b3a3' }}>
                                 <TableRow>
                                     {['Coin', 'Price', '24h Change', 'Market Cap'].map((head) => (
                                         <TableCell
@@ -92,7 +117,7 @@ const CoinsTable = () => {
                                                 border: 'none',
                                             }}
                                             key={head}
-                                            align={'right'}
+                                            align={'left'}
                                         >
                                             {head}
                                         </TableCell>
@@ -100,7 +125,7 @@ const CoinsTable = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {coins
+                                {handleSearch()
                                     .slice((page - 1) * 10, (page - 1) * 10 + 10)
                                     .map((row) => {
                                         const profit = row.price_change_percentage_24h > 0;
@@ -132,21 +157,22 @@ const CoinsTable = () => {
                                                             style={{
                                                                 textTransform: "uppercase",
                                                                 fontSize: 22,
+                                                                color: "#008774" 
                                                             }}
                                                         >
                                                             {row.symbol}
                                                         </span>
-                                                        <span style={{ color: "darkgrey" }}>
+                                                        <span style={{ color: "#000" }}>
                                                             {row.name}
                                                         </span>
                                                     </div>
                                                 </TableCell>
-                                                <TableCell align="right">
+                                                <TableCell align="left" style={{color: "#008774", fontSize: 18 }}>
                                                     {symbol}{" "}
                                                     {numberWithCommas(row.current_price.toFixed(2))}
                                                 </TableCell>
                                                 <TableCell
-                                                    align="right"
+                                                    align="left"
                                                     style={{
                                                         color: profit > 0 ? "rgb(14, 203, 129)" : "red",
                                                         fontWeight: 500,
@@ -155,7 +181,7 @@ const CoinsTable = () => {
                                                     {profit && "+"}
                                                     {row.price_change_percentage_24h.toFixed(2)}%
                                                 </TableCell>
-                                                <TableCell align="right">
+                                                <TableCell align="left" style={{color: "#008774", fontSize: 18 }}>
                                                     {symbol}{" "}
                                                     {numberWithCommas(
                                                         row.market_cap.toString().slice(0, -6)

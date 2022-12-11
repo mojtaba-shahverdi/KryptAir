@@ -7,7 +7,7 @@
     scroll-behavior: smooth;
 }
 body{
-    background: #14161a;
+    background: #e3e2df;
 }
 a {
     text-decoration: none;
@@ -31,3 +31,45 @@ thead>tr>th:nth-child(1) {
   ::-webkit-scrollbar-thumb:hover {
     background: #0096877d; 
   } 
+
+  #root > div > div.MuiContainer-root.MuiContainer-maxWidthLg.makeStyles-container-68.css-1oqqzyl-MuiContainer-root > div.MuiFormControl-root.MuiTextField-root.css-1u3bzj6-MuiFormControl-root-MuiTextField-root > div > fieldset{
+    border-color: #41b3a3;
+    border-width: 3px;
+  }
+  
+  .css-gugoqk-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
+    color: #41b3a3 !important;
+  }
+  .css-9425fu-MuiOutlinedInput-notchedOutline {
+    border-color: #41b3a3 !important;
+  }
+  
+  .css-gugoqk-MuiFormLabel-root-MuiInputLabel-root {
+    color: #41b3a3 !important;
+  }
+  .css-p51h6s-MuiInputBase-input-MuiOutlinedInput-input{
+    color: #000 !important;
+    font-size: 25px !important;
+    padding: 10px !important;
+  }
+  .css-p51h6s-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill{
+    -webkit-box-shadow: 0 0 0 100px #84cdc967 inset !important;
+    -webkit-text-fill-color: #000 !important;
+  }
+  .css-6y92bt-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+    background: rgba(255, 255, 255, 0.6) !important;
+    &:hover{
+      color: #000 !important
+    }
+  }
+  .makeStyles-pagination-170 .MuiPaginationItem-root {
+    &:hover{
+      background: #4db6ac8c;
+      color: #fff
+    }
+}
+.MuiContainer-root {
+  &:nth-child(1){
+    padding:0 !important;
+  }
+}

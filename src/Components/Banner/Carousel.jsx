@@ -2,15 +2,30 @@ import { makeStyles } from '@mui/styles'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { CryptoState } from '../../CryptoContext'
-import { TrendingCoins } from '../../config/api'
+import { TrendingCoins, CoinList } from '../../config/api'
 import AliceCarousel from 'react-alice-carousel'
 import { Link } from 'react-router-dom'
+import Logo from '../../assets/logo.png'
 
 const useStyles = makeStyles((theme) => ({
+    display: 'flex',
     carousel: {
         height: '50%',
         display: 'flex',
         alignItems: 'center',
+        width: '80%',
+        background: 'rgba(255, 255, 255, 0.2)',
+        borderRadius: '16px',
+        boxShadow: '0 4px 30px rgb(0 0 0 / 10%)',
+        backdropFilter: 'blur(5px)',
+        border: '1px solid rgba(255, 255, 255, 0.3)',
+        padding: '25px 0 !important',
+        '@media (max-width:700px)':{
+            width: '70%',
+        },
+        '@media (max-width:500px)':{
+            width: '100%',
+        }
     },
     carouselItem: {
         display: 'flex',
@@ -20,6 +35,41 @@ const useStyles = makeStyles((theme) => ({
         textTransform: 'uppercase',
         color: 'white',
     },
+    header:{
+        width: '15%',
+        background: 'rgba(255, 255, 255, 0.2)',
+        borderRadius: '16px',
+        boxShadow: '0 4px 30px rgb(0 0 0 / 10%)',
+        backdropFilter: 'blur(5px)',
+        border: '1px solid rgba(255, 255, 255, 0.3)',
+        padding: '25px 0 !important',
+        color: '#41b3a3',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        '& h4':{
+            textAlign: 'center'
+        },
+        '@media (max-width:700px)':{
+            width: '20%',
+        },
+        '@media (max-width:500px)':{
+            width: '100%',
+            marginBottom: 20,
+            flexDirection: 'row',
+            justifyContent: 'space-evenly'
+        }
+    },
+    container:{
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '100%',
+        padding: '0 !important',
+        '@media (max-width:500px)':{
+            flexDirection: 'column-reverse'
+        }
+    }
 }))
 
 export const numberWithCommas = (x) => {
@@ -35,7 +85,7 @@ const Carousel = () => {
 
     const fetchTrendingCoins = async () => {
         const { data } = await axios.get(TrendingCoins(currency))
-
+        console.log(data)
         setTrending(data)
     }
 
@@ -57,19 +107,19 @@ const Carousel = () => {
                     height='80'
                     style={{ marginBottom: 10 }}
                 />
-                <span>
+                <span style={{color: '#000'}}>
                     {coin?.symbol}
                     &nbsp;
                     <span 
                         style={{
-                            color: profit > 0 ? 'rgb(14, 203 129)' : 'red',
+                            color: profit > 0 ? '#0ecb81' : 'red',
                             fontWeight: 500,
                         }}
                     >
                         {profit && '+'} {coin?.price_change_percentage_24h?.toFixed(2)}%
                     </span>
                 </span>
-                <span style={{ fontSize: 22, fontWeight: 500 }}>
+                <span style={{ fontSize: 22, fontWeight: 500, color: '#000' }}>
                     {symbol} {numberWithCommas(coin?.current_price.toFixed(2))}
                 </span>
             </Link>
@@ -86,18 +136,24 @@ const Carousel = () => {
     }
 
   return (
-    <div className={classes.carousel}>
-        <AliceCarousel 
-            mouseTracking
-            infinite
-            autoPlayInterval={1000}
-            animationDuration={1500}
-            disableDotsControls
-            disableButtonsControls
-            responsive={responsive}
-            autoPlay
-            items={items}
-        />
+    <div className={classes.container}>
+        <div className={classes.carousel}>
+            <AliceCarousel 
+                mouseTracking
+                infinite
+                autoPlayInterval={1000}
+                animationDuration={1500}
+                disableDotsControls
+                disableButtonsControls
+                responsive={responsive}
+                autoPlay
+                items={items}
+                />
+        </div>
+        <div className={classes.header}>
+            <img src={Logo} width={80} />
+           <h4>Crypto Price Tracker</h4>
+        </div>
     </div>
   )
 }

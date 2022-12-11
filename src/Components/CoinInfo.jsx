@@ -30,13 +30,26 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     marginTop: 25,
     padding: 40,
-    // [theme.breakpoints.down('md')]: {
-    //   width: '100%',
-    //   marginTop: 0,
-    //   padding: 20,
-    //   paddingTop: 0,
-    // },
+    '@media (max-width:850px)': {
+      width: '100%',
+      marginTop: 0,
+      padding: 20,
+      paddingTop: 0,
+    },
   },
+  select:{
+    display: 'flex',
+    marginTop: 20,
+    justifyContent: 'space-around',
+    width: '100%',
+    '@media (max-width: 580px)':{
+      flexWrap: 'wrap',
+      '& span':{
+        width: '40%',
+        marginTop: 10
+      }
+    }
+  }
 }))
 
 const CoinInfo = ({ coin }) => {
@@ -105,14 +118,7 @@ const theme = createTheme()
                   },
                 }}
               />
-              <div
-                style={{
-                  display: 'flex',
-                  marginTop: 20,
-                  justifyContent: 'space-around',
-                  width: '100%',
-                }}
-              >
+              <div className={classes.select}>
                 {chartDays.map(day => (
                   <SelectButton
                     key={day.value}

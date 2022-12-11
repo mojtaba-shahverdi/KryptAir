@@ -65,6 +65,13 @@ const useStyles = makeStyles({
             transition: '0.3s',
             fill: red.A700,
         },
+    },
+    button:{
+        display: 'flex',
+        justifyContent: 'center',
+        '@media (max-width:500px)':{
+            margin: '10px 0'
+        }
     }
 })
 
@@ -121,10 +128,11 @@ const UserSidebar = () => {
     const classes = useStyles()
 
     return (
-        <div>
+        <div className={classes.button}>
             {['right'].map((anchor) => (
                 <React.Fragment key={anchor}>
                     <Avatar
+                        
                         onClick={toggleDrawer(anchor, true)}
                         style={{
                             height: 38,
@@ -145,6 +153,7 @@ const UserSidebar = () => {
                                 <Avatar
                                     src={user.photoURL}
                                     alt={user.displayName.toUpperCase() || user.email}
+                                    onClick={toggleDrawer(anchor, true)}
                                     style={{
                                         width: 200,
                                         height: 200,

@@ -5,23 +5,28 @@ import Carousel from './Carousel'
 
 const useStyles = makeStyles(() => ({
     banner: {
-        background: 'url(./banner.png)',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
+        width: '95%',
+        margin: 'auto'
     },
     bannerContent: {
-        height: 400,
+        // background: 'rgba(255, 255, 255, 0.2)',
+        // borderRadius: '16px',
+        // boxShadow: '0 4px 30px rgb(0 0 0 / 10%)',
+        // backdropFilter: 'blur(5px)',
+        // border: '1px solid rgba(255, 255, 255, 0.3)',
+        // padding: '25px 0 !important',
+        // height: 400,
+        marginTop: 30,
         display: 'flex',
-        flexDirection: 'column',
-        paddingTop: 25,
+        // flexDirection: 'column',
         justifyContent: 'space-around',
     },
     tagline: {
         display: 'flex',
         height: '40%',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        textAlign: 'center',
+        // flexDirection: 'column',
+        justifyContent: 'space-between',
+        // textAlign: 'center',
     },
 }))
 
@@ -33,7 +38,7 @@ const Banner = () => {
         <div className={classes.banner}>
             <Container className={classes.bannerContent}>
                 <div className={classes.tagline}>
-                    <Typography
+                    {/* <Typography
                         variant='h1'
                         style={{
                             fontWeight: 'bold',
@@ -42,8 +47,8 @@ const Banner = () => {
                         }}
                     >
                         Crypto Scan
-                    </Typography>
-                    <Typography
+                    </Typography> */}
+                    {/* <Typography
                         variant='subtitle2'
                         style={{
                             color: 'darkgrey',
@@ -52,9 +57,9 @@ const Banner = () => {
                         }}
                     >
                         Invest now, you'll never regret it
-                    </Typography>
+                    </Typography> */}
                 </div>
-                        <Carousel />
+                <Carousel />
             </Container>
         </div>
     )

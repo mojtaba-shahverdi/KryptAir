@@ -16,17 +16,18 @@ export function numberWithCommas(x) {
 }
 const useStyles = makeStyles((theme) => ({
   container: {
+    color: '#000',
     display: 'flex',
-    // [theme.breakpoints.down('md')]: {
-    //   flexDirection: 'column',
-    //   alignItems: 'center',
-    // },
+    '@media (max-width:850px)': {
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
   },
   sidebar: {
     width: '30%',
-    // [theme.breakpoints('md')]: {
-    //     width: '100%',
-    //   },
+    '@media (max-width:850px)': {
+        width: '100%',
+      },
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -55,18 +56,21 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    // [theme.breakpoints.down('md')]: {
-    //   display: 'flex',
-    //   justifyContent: 'space-around',
-    //   alignItems: 'center',
-    // },
-    // [theme.breakpoints.down('sm')]: {
-    //   flexDirection: 'column',
-    //   alignItems: 'center',
-    // },
-    // [theme.breakpoints.down('xs')]: {
-    //   alignItems: 'start',
-    // },
+    '@media (max-width:850px)': {
+      display: 'flex',
+      justifyContent: 'space-around',
+      flexDirection: 'row',
+      alignItems: 'flex-end',
+      flexWrap: 'wrap',
+      '& button':{
+        marginTop:10
+      }
+    },
+    '@media (max-width:500px)': {
+      '& h5':{
+        fontSize: '1.2rem ' 
+      }
+    }
   },
 }))
 
