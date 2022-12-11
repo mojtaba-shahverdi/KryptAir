@@ -1,4 +1,4 @@
-# Crypto Tracker React Application
+# Crypto Tracker Application, built with React JS, Firebase, Axios, Coingecko API, React ChartJS, React Google Button and Material UI
 
 # Demo: [CryptoScan](https://crypto-scan-93917.web.app/).
 
