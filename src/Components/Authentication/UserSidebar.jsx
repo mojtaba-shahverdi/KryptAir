@@ -142,7 +142,7 @@ const UserSidebar = () => {
                             background: teal[500]
                         }}
                         src={user.photoURL}
-                        alt={user.displayName.toUpperCase() || user.email}
+                        alt={user.displayName || user.email}
                     />
                     <Drawer
                         anchor={anchor}
@@ -153,7 +153,7 @@ const UserSidebar = () => {
                             <div className={classes.profile}>
                                 <Avatar
                                     src={user.photoURL}
-                                    alt={user.displayName.toUpperCase() || user.email}
+                                    alt={user.displayName || user.email}
                                     onClick={toggleDrawer(anchor, true)}
                                     style={{
                                         width: 200,
