@@ -1,8 +1,8 @@
 # Crypto Tracker React Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Demo: [CryptoScan](https://cryptoscan.vercel.app/).
 
-## Available Scripts
+## Build with
 
 In the project directory, you can run:
 
