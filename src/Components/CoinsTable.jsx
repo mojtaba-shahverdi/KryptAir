@@ -95,7 +95,7 @@ const CoinsTable = () => {
                     label="Search Any Crypto..."
                     variant='outlined'
                     className={classes.input}
-                    style={{ marginBottom: 20, width: '100%' }}
+                    style={{ marginBottom: 20, width: '100%', color: '#000' }}
                     onChange={(e) => setSearch(e.target.value)}
                     InputLabelProps={{
                     style: {
