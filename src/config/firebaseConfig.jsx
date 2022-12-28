@@ -1,6 +1,6 @@
 const firebaseConfig = {
     apiKey: "AIzaSyBl3IiOrlQVd6nsciWKwUCSagaiabqsD8w",
-    authDomain: "crypto-scan-93917.firebaseapp.com",
+    authDomain: "crypto.mojtaba.tech",
     projectId: "crypto-scan-93917",
     storageBucket: "crypto-scan-93917.appspot.com",
     messagingSenderId: "101872535504",
