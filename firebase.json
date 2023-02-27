@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "cryptoscan",
     "public": "build",
     "ignore": [
       "firebase.json",

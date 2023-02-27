@@ -57,7 +57,7 @@ const Header = () => {
             <AppBar color='transparent' position='static'>
                 <Container>
                     <Toolbar>
-                        <Typography onClick={() => navigate('/')} className={classes.title} variant='h5'>Crypto Scan</Typography>
+                        <Typography onClick={() => navigate('/')} className={classes.title} variant='h5'>KryptAir</Typography>
                         <div className={classes.buttons}>
                         <Select variant='outlined' style={{
                             width: 100,
