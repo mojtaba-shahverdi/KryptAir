@@ -1,6 +1,6 @@
 # Crypto Tracker Application, built with React JS, Firebase, Axios, Coingecko API, React ChartJS, React Google Button and Material UI
 
-# Demo: [KryptAir](https://crypto-scan-93917.web.app/).
+# Demo: [KryptAir](https://kryptair.mojtaba.tech).
 
 ![Screenshot (97)](https://user-images.githubusercontent.com/91985158/206930308-52b18436-0b59-4c40-ad10-d7b1ca46b26a.png)
 # Login/Signup using google mails
