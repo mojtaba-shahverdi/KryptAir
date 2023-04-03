@@ -14,9 +14,7 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
-// import axios from 'axios'
 import React, { useEffect, useState } from "react";
-// import { CoinList } from '../config/api'
 import { CryptoState } from "../CryptoContext";
 import { useNavigate } from "react-router-dom";
 import Pagination from "@mui/material/Pagination";
@@ -34,7 +32,6 @@ const useStyles = makeStyles({
     "&:hover": {
       transition: "1s",
       background: "rgba(255, 255, 255, 0.6)",
-      // borderRadius: '16px',
       boxShadow: "0 4px 30px rgb(0 0 0 / 10%)",
       backdropFilter: "blur(5px)",
       border: "1px solid rgba(255, 255, 255, 0.3)",
