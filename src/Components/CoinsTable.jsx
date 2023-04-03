@@ -115,9 +115,8 @@ const CoinsTable = () => {
           }}
         />
         <TableContainer>
-          {!handleSearch().coin && <img src={Loading} alt="loading" />}
           {loading ? (
-            <LinearProgress style={{ background: teal.A700 }} />
+            <LinearProgress style={{ background: teal.A100 }} />
           ) : (
             <Table aria-label="simple table">
               <TableHead
@@ -170,7 +169,10 @@ const CoinsTable = () => {
                             style={{ marginBottom: 10 }}
                           />
                           <div
-                            style={{ display: "flex", flexDirection: "column" }}
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                            }}
                           >
                             <span
                               style={{

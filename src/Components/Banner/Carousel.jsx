@@ -80,7 +80,7 @@ const Carousel = () => {
   const [trending, setTrending] = useState([]);
   const classes = useStyles();
 
-  const { currency, symbol } = CryptoState();
+  const { currency, symbol, loading } = CryptoState();
 
   const fetchTrendingCoins = async () => {
     const { data } = await axios.get(TrendingCoins(currency));
@@ -134,7 +134,14 @@ const Carousel = () => {
   return (
     <div className={classes.container}>
       <div className={classes.carousel}>
-        {items.coin ? (
+        {loading ? (
+          <img
+            src={Loading}
+            width="10%"
+            style={{ margin: "auto" }}
+            alt="Loading"
+          />
+        ) : (
           <AliceCarousel
             mouseTracking
             infinite
@@ -145,13 +152,6 @@ const Carousel = () => {
             responsive={responsive}
             autoPlay
             items={items}
-          />
-        ) : (
-          <img
-            src={Loading}
-            width="10%"
-            style={{ margin: "auto" }}
-            alt="Loading"
           />
         )}
       </div>
