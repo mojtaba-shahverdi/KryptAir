@@ -20,7 +20,6 @@ import React, { useEffect, useState } from "react";
 import { CryptoState } from "../CryptoContext";
 import { useNavigate } from "react-router-dom";
 import Pagination from "@mui/material/Pagination";
-import { Loading } from "../assets";
 
 export function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
